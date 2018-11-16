@@ -1,0 +1,30 @@
+version: '2'
+
+services:
+  postgres:
+    image: postgres:9.6.9-alpine
+    container_name: postgres
+    volumes:
+      - pg_volume:/var/lib/postgresql/data:cached
+    mem_limit: 128mb
+    ports:
+      - "5432:5432"
+
+  listing:
+    build:
+      context: .
+    image: listing
+    container_name: listing
+    tty: true
+    volumes:
+      - .:/myapp
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    external_links:
+      - postgres
+
+volumes:
+  pg_volume:
+    external: true
