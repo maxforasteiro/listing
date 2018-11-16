@@ -2,7 +2,7 @@
 # Source: listing.proto for package 'Listing'
 
 require 'grpc'
-require 'listing_pb'
+require 'protobuf/listing_pb'
 
 module Listing
   module ProductListingService
